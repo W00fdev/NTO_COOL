@@ -11,7 +11,6 @@ public class BuildingsGrid : MonoBehaviour
     public int priseMet;
     public int priseWd;
     public int priseHn;
-    public bool StartPlacing;
 
     private void Awake()
     {
@@ -89,9 +88,10 @@ public class BuildingsGrid : MonoBehaviour
                 grid[placeX + x, placeY + y] = flyingBuilding;
             }
         }
+        
         GameObject.Find("Resources").GetComponent<ResourcesScript>().metall += -priseMet;
         GameObject.Find("Resources").GetComponent<ResourcesScript>().wood += -priseWd;
-        GameObject.Find("Resources").GetComponent<ResourcesScript>().houney += -priseHn;
+        GameObject.Find("Resources").GetComponent<ResourcesScript>().honey += -priseHn;
         flyingBuilding = null;
         
     }

@@ -1,38 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class ResourcesScript : MonoBehaviour
 {
     public int metall;
     public int wood;
-    public int houney;
-    public Text metallText;
-    public Text woodText; 
-    public Text houneyText;
+    public int honey;
+    
+    public TMP_Text metalText;
+    public TMP_Text woodText; 
+    public TMP_Text honeyText;
 
     private void Start()
     {
-        metallText.text = "Metall: " + metall.ToString();
-
-        woodText.text = "Wood: " + wood.ToString();
-
-        houneyText.text = "Houney: " + houney.ToString();
+        UpdateText();
     }
-     
-    public void MetallPlus(int plusMetallCount) => metall += plusMetallCount;
 
-    public void WoodPlus(int plusWoodCount) => wood += plusWoodCount;
-
-    public void HouneyPlus(int plusHouneyCount) => houney += plusHouneyCount;
-
-    private void Update()
+    private void UpdateText()
     {
-        metallText.text = "Metall: " + metall.ToString();
-
-        woodText.text = "Wood: " + wood.ToString();
-
-        houneyText.text = "Houney: " + houney.ToString();
+        metalText.text = metall.ToString();
+        woodText.text = wood.ToString();
+        honeyText.text = honey.ToString();
     }
+
+    public void ChangeMetal(int delta)
+    {
+        metall += delta;
+        UpdateText();
+    }
+
+    public void ChangeWood(int delta)
+    {
+        wood += delta;
+        UpdateText();
+    }
+
+    public void ChangeHoney(int delta)
+    {
+        honey += delta;
+        UpdateText();
+    }
+
 }
