@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,36 +9,26 @@ public class BuildingsGrid : MonoBehaviour
     private Building[,] grid;
     private Building flyingBuilding;
     private Camera mainCamera;
-    public int priseMet;
-    public int priseWd;
-    public int priseHn;
+    private Plane groundPlane;
 
     private void Awake()
     {
         grid = new Building[GridSize.x, GridSize.y];
-
         mainCamera = Camera.main;
+        
+        groundPlane = new Plane(Vector3.up, transform.position);
     }
 
     public void StartPlacingBuilding(Building buildingPrefab)
     {
-        
-            if (flyingBuilding != null)
-            {
-                Destroy(flyingBuilding.gameObject);
-            }
-
+        if (flyingBuilding == null) 
             flyingBuilding = Instantiate(buildingPrefab);
-
     }
 
     private void Update()
     {
-
         if (flyingBuilding != null)
         {
-            
-            var groundPlane = new Plane(Vector3.up, Vector3.zero);
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (groundPlane.Raycast(ray, out float position))
@@ -54,12 +45,11 @@ public class BuildingsGrid : MonoBehaviour
                 
                 if (available && IsPlaceTaken(x, y)) available = false;
 
-                flyingBuilding.transform.position = new Vector3(x, 0, y);
+                flyingBuilding.transform.position = new Vector3(x, transform.position.y, y);
 
                 if (available && Input.GetMouseButtonDown(0))
                 {
                     PlaceFlyingBuilding(x, y);
-                    
                 }
             }
         }
@@ -89,12 +79,14 @@ public class BuildingsGrid : MonoBehaviour
             }
         }
         
-        GameObject.Find("Resources").GetComponent<ResourcesScript>().metall += -priseMet;
-        GameObject.Find("Resources").GetComponent<ResourcesScript>().wood += -priseWd;
-        GameObject.Find("Resources").GetComponent<ResourcesScript>().honey += -priseHn;
         flyingBuilding = null;
-        
     }
+
+    /*public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(groundPlane.ClosestPointOnPlane(transform.position), 0.5f);
+    }*/
 
     public void Delete()
     {

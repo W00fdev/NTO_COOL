@@ -22,9 +22,9 @@ public class CameraControl : MonoBehaviour
 
         _mult = Input.GetKey(KeyCode.LeftShift) ? 2f : 1f;
 
-        transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * rotate * _mult, Space.World);
-        transform.Translate(new Vector3(hor,0,ver) * Time.deltaTime * _mult * speed, Space.Self);
-        transform.position -= transform.up * zoomSpeed * Time.deltaTime * Input.GetAxis("Mouse ScrollWheel");
+        transform.Rotate(Vector3.up * (rotateSpeed * Time.deltaTime * rotate * _mult), Space.Self);
+        transform.Translate(new Vector3(hor,0,ver) * (Time.deltaTime * _mult * speed), Space.Self);
+        transform.position -= transform.up * (zoomSpeed * Time.deltaTime * Input.GetAxis("Mouse ScrollWheel"));
     }
 
 }

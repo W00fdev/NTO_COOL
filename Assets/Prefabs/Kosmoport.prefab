@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6243565643464506864}
   - component: {fileID: 4349850916790054282}
-  - component: {fileID: 6153973754171724070}
   m_Layer: 0
   m_Name: Kosmoport
   m_TagString: Untagged
@@ -47,18 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: {x: 2, y: 2}
---- !u!114 &6153973754171724070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5760911574008837002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b133ef7ede3df143854ce065579e933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3411269024890360473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85,7 +72,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4a372628abac46348a0e8fd7d63e362b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0.493
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a372628abac46348a0e8fd7d63e362b,
         type: 3}
@@ -95,7 +82,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4a372628abac46348a0e8fd7d63e362b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: 0.343
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4a372628abac46348a0e8fd7d63e362b,
         type: 3}
