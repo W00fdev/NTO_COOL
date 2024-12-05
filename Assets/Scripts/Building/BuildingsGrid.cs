@@ -22,7 +22,7 @@ public class BuildingsGrid : MonoBehaviour
     public void StartPlacingBuilding(Building buildingPrefab)
     {
         if (flyingBuilding == null) 
-            flyingBuilding = Instantiate(buildingPrefab);
+        flyingBuilding = Instantiate(buildingPrefab);
     }
 
     private void Update()
