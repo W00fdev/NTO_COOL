@@ -15,13 +15,13 @@ public class BuildingBuyer : MonoBehaviour
     
     public void BuyAndPlace()
     {
-        if (Resources.metall >= MetalPrice
+        if (Resources.metal >= MetalPrice
             && Resources.wood >= WoodPrice
             && Resources.honey >= HoneyPrice)
         {
-            Resources.ChangeMetal(-MetalPrice);
-            Resources.ChangeWood(-WoodPrice);
-            Resources.ChangeHoney(-HoneyPrice);
+            Resources.ChangeMetalPreview(-MetalPrice);
+            Resources.ChangeWoodPreview(-WoodPrice);
+            Resources.ChangeHoneyPreview(-HoneyPrice);
             
             Grid.StartPlacingBuilding(Prefab);
         }

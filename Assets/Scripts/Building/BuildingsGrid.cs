@@ -11,6 +11,8 @@ public class BuildingsGrid : MonoBehaviour
     private Camera mainCamera;
     private Plane groundPlane;
 
+    public ResourcesScript Resources;
+    
     private void Awake()
     {
         grid = new Building[GridSize.x, GridSize.y];
@@ -22,12 +24,12 @@ public class BuildingsGrid : MonoBehaviour
     public void StartPlacingBuilding(Building buildingPrefab)
     {
         if (flyingBuilding == null) 
-        flyingBuilding = Instantiate(buildingPrefab);
+            flyingBuilding = Instantiate(buildingPrefab);
     }
 
     private void Update()
     {
-        if (flyingBuilding != null)
+        if (flyingBuilding)
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -38,10 +40,9 @@ public class BuildingsGrid : MonoBehaviour
                 int x = Mathf.RoundToInt(worldPosition.x);
                 int y = Mathf.RoundToInt(worldPosition.z);
                 
-                bool available = true;
-
-                if (x < 0 || x > GridSize.x - flyingBuilding.Size.x) available = false; 
-                if (y < 0 || y > GridSize.y - flyingBuilding.Size.y) available = false; 
+                bool available = !(x < 0 || y < 0 
+                                         || x > GridSize.x - flyingBuilding.Size.x
+                                         || y > GridSize.y - flyingBuilding.Size.y); 
                 
                 if (available && IsPlaceTaken(x, y)) available = false;
 
@@ -50,6 +51,10 @@ public class BuildingsGrid : MonoBehaviour
                 if (available && Input.GetMouseButtonDown(0))
                 {
                     PlaceFlyingBuilding(x, y);
+                }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    Delete();
                 }
             }
         }
@@ -80,6 +85,8 @@ public class BuildingsGrid : MonoBehaviour
         }
         
         flyingBuilding = null;
+        
+        Resources.ApplyPreview();
     }
 
     /*public void OnDrawGizmos()
@@ -94,5 +101,7 @@ public class BuildingsGrid : MonoBehaviour
         {
             Destroy(flyingBuilding.gameObject);
         }
+        
+        Resources.CancelPreview();
     }
 }

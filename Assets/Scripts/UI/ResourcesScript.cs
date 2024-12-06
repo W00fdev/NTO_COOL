@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class ResourcesScript : MonoBehaviour
 {
-    public int metall;
+    public int metal;
     public int wood;
     public int honey;
     
@@ -14,33 +14,53 @@ public class ResourcesScript : MonoBehaviour
     public TMP_Text woodText; 
     public TMP_Text honeyText;
 
+    private int metalPreview;
+    private int woodPreview;
+    private int honeyPreview;
+    
     private void Start()
     {
-        UpdateText();
+        CancelPreview();
     }
 
     private void UpdateText()
     {
-        metalText.text = metall.ToString();
-        woodText.text = wood.ToString();
-        honeyText.text = honey.ToString();
+        metalText.text = metalPreview.ToString();
+        woodText.text = woodPreview.ToString();
+        honeyText.text = honeyPreview.ToString();
     }
 
-    public void ChangeMetal(int delta)
+    public void ApplyPreview()
     {
-        metall += delta;
+        metal = metalPreview;
+        wood = woodPreview;
+        honey = honeyPreview;
+    }
+
+    public void CancelPreview()
+    {
+        metalPreview = metal;
+        woodPreview = wood;
+        honeyPreview = honey;
+
+        UpdateText();
+    }
+    
+    public void ChangeMetalPreview(int delta)
+    {
+        metalPreview += delta;
         UpdateText();
     }
 
-    public void ChangeWood(int delta)
+    public void ChangeWoodPreview(int delta)
     {
-        wood += delta;
+        woodPreview += delta;
         UpdateText();
     }
 
-    public void ChangeHoney(int delta)
+    public void ChangeHoneyPreview(int delta)
     {
-        honey += delta;
+        honeyPreview += delta;
         UpdateText();
     }
 
