@@ -3,10 +3,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Availability
+{
+    NotChosen = 0,
+    NotAvailable,
+    Available,
+}
+
 public class Building : MonoBehaviour
 {
     public Vector2Int Size = Vector2Int.one;
 
+    public void DrawAvailability(Availability type)
+    {
+        var components = GetComponentsInChildren<OutlineFx.OutlineFx>();
+
+        foreach (var component in components)
+        {
+            switch (type)
+            {
+                case Availability.NotChosen:
+                    component.enabled = false;
+                    break;
+                case Availability.NotAvailable:
+                    component.enabled = true;
+                    component.Color = Color.red;
+                    break;
+                case Availability.Available:
+                    component.enabled = true;
+                    component.Color = Color.green;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+    }
+    
     private void OnDrawGizmos()
     {
         for (int x = 0; x < Size.x; x++)

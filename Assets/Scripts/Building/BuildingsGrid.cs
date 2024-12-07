@@ -40,6 +40,8 @@ public class BuildingsGrid : MonoBehaviour
     {
         if (flyingBuilding == null) 
             flyingBuilding = Instantiate(buildingPrefab);
+        
+        flyingBuilding.DrawAvailability(Availability.Available);
     }
 
     private void Update()
@@ -64,6 +66,12 @@ public class BuildingsGrid : MonoBehaviour
 
                 flyingBuilding.transform.position = new Vector3(x, transform.position.y, y);
 
+                Availability type = (available) 
+                    ? Availability.Available 
+                    : Availability.NotAvailable;
+                
+                flyingBuilding.DrawAvailability(type);
+                
                 if (available && Input.GetMouseButtonDown(0))
                 {
                     PlaceFlyingBuilding(x, y);
@@ -100,6 +108,7 @@ public class BuildingsGrid : MonoBehaviour
             }
         }
         
+        flyingBuilding.DrawAvailability(Availability.NotChosen);
         flyingBuilding = null;
         
         Debug.Log(placeX + " " + placeY);
