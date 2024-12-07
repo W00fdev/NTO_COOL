@@ -12,6 +12,8 @@ public class BuildingsGrid : MonoBehaviour
     private Plane groundPlane;
 
     public ResourcesScript Resources;
+
+    public Building StartFlagBuilding;
     
     private void Awake()
     {
@@ -19,6 +21,19 @@ public class BuildingsGrid : MonoBehaviour
         mainCamera = Camera.main;
         
         groundPlane = new Plane(Vector3.up, transform.position);
+    }
+
+    private void Start()
+    {
+        int placeX = 47;
+        int placeY = 37;
+        for (int x = 0; x < StartFlagBuilding.Size.x; x++)
+        {
+            for (int y = 0; y < StartFlagBuilding.Size.y; y++)
+            {
+                grid[placeX + x, placeY + y] = StartFlagBuilding;
+            }
+        }
     }
 
     public void StartPlacingBuilding(Building buildingPrefab)
@@ -42,7 +57,8 @@ public class BuildingsGrid : MonoBehaviour
                 
                 bool available = !(x < 0 || y < 0 
                                          || x > GridSize.x - flyingBuilding.Size.x
-                                         || y > GridSize.y - flyingBuilding.Size.y); 
+                                         || y > GridSize.y - flyingBuilding.Size.y);
+
                 
                 if (available && IsPlaceTaken(x, y)) available = false;
 
@@ -86,6 +102,7 @@ public class BuildingsGrid : MonoBehaviour
         
         flyingBuilding = null;
         
+        Debug.Log(placeX + " " + placeY);
         Resources.ApplyPreview();
     }
 

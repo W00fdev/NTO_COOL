@@ -9,14 +9,17 @@ public class ResourcesScript : MonoBehaviour
     public int metal;
     public int wood;
     public int honey;
+    public int bears;
     
     public TMP_Text metalText;
     public TMP_Text woodText; 
     public TMP_Text honeyText;
+    public TMP_Text bearsText;
 
     private int metalPreview;
     private int woodPreview;
     private int honeyPreview;
+    private int bearsPreview;
     
     private void Start()
     {
@@ -28,6 +31,7 @@ public class ResourcesScript : MonoBehaviour
         metalText.text = metalPreview.ToString();
         woodText.text = woodPreview.ToString();
         honeyText.text = honeyPreview.ToString();
+        bearsText.text = bearsPreview.ToString();
     }
 
     public void ApplyPreview()
@@ -35,6 +39,7 @@ public class ResourcesScript : MonoBehaviour
         metal = metalPreview;
         wood = woodPreview;
         honey = honeyPreview;
+        bears = bearsPreview;
     }
 
     public void CancelPreview()
@@ -42,6 +47,7 @@ public class ResourcesScript : MonoBehaviour
         metalPreview = metal;
         woodPreview = wood;
         honeyPreview = honey;
+        bearsPreview = bears;
 
         UpdateText();
     }
@@ -63,5 +69,10 @@ public class ResourcesScript : MonoBehaviour
         honeyPreview += delta;
         UpdateText();
     }
-
+    
+    public void ChangeBearsPreview(int delta)
+    {
+        bearsPreview += delta;
+        UpdateText();
+    }
 }
