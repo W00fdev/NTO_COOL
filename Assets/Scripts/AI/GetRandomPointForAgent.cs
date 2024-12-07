@@ -9,6 +9,9 @@ public class GetRandomPointForAgent : GetPointForAgent
     
     public override Vector3 GetPoint()
     {
-        return Points[_indexer].position;
+        int index = _indexer;
+        _indexer++;
+        _indexer %= Points.Length;
+        return Points[index].position;
     }
 }

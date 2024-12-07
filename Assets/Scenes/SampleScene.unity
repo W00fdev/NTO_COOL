@@ -1108,7 +1108,7 @@ MonoBehaviour:
   HoneyPrice: 10
   BearsPrice: 0
   Resources: {fileID: 2074139485}
-  Prefab: {fileID: 4498768725376207712, guid: 789d0e06c1029c94c93dbc52c6bdff37, type: 3}
+  Prefab: {fileID: 9097566770654755186, guid: 789d0e06c1029c94c93dbc52c6bdff37, type: 3}
   Grid: {fileID: 864390512}
 --- !u!1 &303579736
 GameObject:
@@ -12693,7 +12693,7 @@ GameObject:
   - component: {fileID: 919132147595044432}
   m_Layer: 0
   m_Name: MainSquare
-  m_TagString: Untagged
+  m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

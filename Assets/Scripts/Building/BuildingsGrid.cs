@@ -109,10 +109,12 @@ public class BuildingsGrid : MonoBehaviour
         }
         
         flyingBuilding.DrawAvailability(Availability.NotChosen);
+        flyingBuilding.Build();
         flyingBuilding = null;
         
         Debug.Log(placeX + " " + placeY);
         Resources.ApplyPreview();
+        
     }
 
     /*public void OnDrawGizmos()

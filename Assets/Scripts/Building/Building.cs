@@ -37,8 +37,9 @@ public class Building : MonoBehaviour
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
-
     }
+
+
     
     private void OnDrawGizmos()
     {
@@ -53,5 +54,8 @@ public class Building : MonoBehaviour
             }
         }
     }
-    
+
+    public virtual void Build()
+    {
+    }
 }

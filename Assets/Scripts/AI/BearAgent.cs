@@ -9,30 +9,70 @@ public class BearAgent : MonoBehaviour
     
     [SerializeField] private GetPointForAgent _resourceTarget;
     [SerializeField] private GetPointForAgent _factoryTarget;
-    [SerializeField] private GetRandomPointForAgent _flagTarget;
+    private GetRandomPointForAgent _flagTarget;
     
-    [SerializeField] private float _speed;
-
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
 
     private Vector3 _targetPosition;
     private bool _toWork;
     private bool _prevToWork;
-    
-    private void Start()
+    private bool _toFlag;
+    private bool _isStopped;
+
+    private void Awake()
     {
         _toWork = true;
         _prevToWork = false;
 
-
+        SelfInitialize();
     }
 
+    private void SelfInitialize()
+    {
+        _flagTarget = GameObject.FindGameObjectWithTag("Flag").GetComponent<GetRandomPointForAgent>();
+    }
+    
+    public void GoToFlag()
+    {
+        _toFlag = true;
+        _targetPosition = _flagTarget.GetPoint();
+
+        _animator.SetTrigger("ToWork");
+        _resourceItem.gameObject.SetActive(false);
+        _agent.SetDestination(_targetPosition);
+    }
+
+    
+    private void OnFlag()
+    {
+        _toFlag = false;
+        _agent.isStopped = true;
+        _targetPosition = Vector3.forward * 1000f;
+        _isStopped = true;
+        
+        _animator.SetTrigger("HappyIdle");
+    }
+    
     private void Update()
     {
-        Vector3 direction = Vector3.zero;
+        if (_toFlag && !_isStopped)
+        {
+            var positionWithoutY = transform.position;
+            positionWithoutY.y = 0f;
+            
+            var targetWithoutY = _targetPosition;
+            targetWithoutY.y = 0f;
+
+            if (_agent.isStopped || Vector3.Distance(positionWithoutY, targetWithoutY) < 0.5f)
+            {
+                OnFlag();
+            } 
+            
+            return;
+        }
         
-        if (_toWork)
+        if (_toWork && !_isStopped)
         {
             if (_prevToWork == false)
                 ToWork();
@@ -43,10 +83,10 @@ public class BearAgent : MonoBehaviour
             var targetWithoutY = _targetPosition;
             targetWithoutY.y = 0f;
             
-            if (_agent.isStopped || Vector3.Distance(positionWithoutY, targetWithoutY) < 0.5f)
+            if (Vector3.Distance(positionWithoutY, targetWithoutY) < 0.5f)
                 _toWork = false; 
         }
-        else
+        else if (!_isStopped)
         {
             if (_prevToWork)
                 FromWork();
@@ -57,7 +97,7 @@ public class BearAgent : MonoBehaviour
             var targetWithoutY = _targetPosition;
             targetWithoutY.y = 0f;
             
-            if (_agent.isStopped || Vector3.Distance(positionWithoutY, targetWithoutY) < 0.5f)
+            if (Vector3.Distance(positionWithoutY, targetWithoutY) < 0.5f)
                 _toWork = true;
             
             //if (Vector3.Distance(transform.position, _startPosition) < 0.5f)
@@ -66,6 +106,7 @@ public class BearAgent : MonoBehaviour
         
         //transform.position += direction * (_speed * Time.deltaTime);
     }
+
 
     private void ToWork()
     {

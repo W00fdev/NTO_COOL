@@ -1353,11 +1353,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2c3094193ef1c42835b25e6ad272ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceItem: {fileID: 0}
-  _startPosition: {x: 0, y: 0, z: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
+  _resourceItem: {fileID: 5354375696461810011}
+  _resourceTarget: {fileID: 0}
+  _factoryTarget: {fileID: 0}
+  _flagTarget: {fileID: 0}
   _speed: 0
-  _animator: {fileID: 0}
+  _agent: {fileID: 773700020769756129}
+  _animator: {fileID: 3913019402131786911}
 --- !u!195 &773700020769756129
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1368,7 +1370,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
