@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rain : MonoBehaviour
 {
+    public Light Light;
     private ParticleSystem _particleSystem;
     private bool _isRain = false;
 
@@ -12,12 +13,24 @@ public class Rain : MonoBehaviour
         _particleSystem = GetComponent<ParticleSystem>();
         StartCoroutine(Weather());
     }
+    private void Update()
+    {
+        if (_isRain && Light.intensity > 0.25f)
+            LightIntensity(-1);
+        else if (!_isRain && Light.intensity < 0.5f)
+            LightIntensity(1);
 
+
+    }
+    private void LightIntensity(int mult)
+    {
+        Light.intensity += 0.1f * Time.deltaTime * mult;
+    }
     IEnumerator Weather()
     {
         while (true)
         {
-            yield return new WaitForSeconds(UnityEngine.Random.Range(120f, 180f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(12f, 18f));
 
             if (_isRain)
             {

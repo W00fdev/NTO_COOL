@@ -1133,7 +1133,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.06
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7920,6 +7920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29d14bcafe2a0074181724951289c222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Light: {fileID: 410087040}
 --- !u!1 &1513618509
 GameObject:
   m_ObjectHideFlags: 0
