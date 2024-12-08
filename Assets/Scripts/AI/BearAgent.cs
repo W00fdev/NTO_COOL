@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,10 @@ public class BearAgent : MonoBehaviour
     private bool _prevToWork;
     private bool _toFlag;
     private bool _isStopped;
+
+    private ProductionType _type;
+
+    public Action<ProductionType> AmbarEntered;
 
     private void Awake()
     {
@@ -112,7 +117,7 @@ public class BearAgent : MonoBehaviour
     }
 
 
-    public void ToWork()
+    public void ToWork(bool fromFlag = false)
     {
         _toWork = true;
         _prevToWork = true;
@@ -126,6 +131,11 @@ public class BearAgent : MonoBehaviour
         
         _targetPosition = _factoryTarget.GetPoint();
         _agent.SetDestination(_targetPosition);
+
+        if (fromFlag == false)
+        {
+            AmbarEntered?.Invoke(_type);
+        }
     }
     
     private void FromWork()
@@ -141,12 +151,15 @@ public class BearAgent : MonoBehaviour
         _agent.SetDestination(_targetPosition);
     }
 
-    public void Initialize(GetRandomPointForAgent flag, GetPointForAgent ambar)
+    public void Initialize(GetRandomPointForAgent flag)
     {
         _flagTarget = flag;
-        _resourceTarget = ambar;
     }
 
-    public void SetWorkPlace(GetPointForAgent work)
-        => _factoryTarget = work;
+    public void SetWorkPlace(GetPointForAgent work, GetPointForAgent ambar, ProductionType type)
+    {
+        _type = type;
+        _resourceTarget = ambar;
+        _factoryTarget = work;
+    }
 }

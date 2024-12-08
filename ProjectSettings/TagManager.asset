@@ -10,6 +10,8 @@ TagManager:
   - Stonemill
   - Sawmill
   - Production
+  - Resources
+  - GameOver
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UI;
 using UnityEngine;
 
 public enum ProductionType
@@ -13,17 +14,20 @@ public enum ProductionType
 
 public class ProductionController : MonoBehaviour
 {
-    public GetPointForAgent Ambar;
+    public GetPointForAgent AmbarWood;
+    public GetPointForAgent AmbarMetal;
+    public GetPointForAgent AmbarPaseka;
+    
     public GetPointForAgent Sawmill;
     public GetPointForAgent Stonemill;
     public GetPointForAgent Paseka;
 
     public GetRandomPointForAgent Flag;
-
-    public ResourcesScript Resources;
+    public FloatingSpawner _spawner;
     
-    public int BearsAtFlag;
+    public ResourcesScript Resources;
 
+    public int BearsAtFlag;
 
     [SerializeField] private TMP_Text _atPasekaText;
     [SerializeField] private TMP_Text _atStonemillText;
@@ -35,12 +39,12 @@ public class ProductionController : MonoBehaviour
 
     private List<BearAgent> _bearsAtFlag = new();
     
-    private const int _maxWorkersCount = 6;
+    private const int _maxWorkersCount = 12;
     public const int _maxFlagCount = 40;
     
     public void BearSpawned(BearAgent agent)
     {
-        agent.Initialize(Flag, Ambar);
+        agent.Initialize(Flag);
         agent.GoToFlag();
     }
 
@@ -74,22 +78,41 @@ public class ProductionController : MonoBehaviour
         switch (type)
         {
             case ProductionType.Sawmill:
-                bear.SetWorkPlace(Sawmill);
+                bear.SetWorkPlace(Sawmill, AmbarWood, type);
                 _sawmillBearsCount++;
                 _atSawmillText.text = $"{_sawmillBearsCount} / {_maxWorkersCount}";
                 break;
             case ProductionType.Stonemill:
-                bear.SetWorkPlace(Stonemill);
+                bear.SetWorkPlace(Stonemill, AmbarMetal,type);
                 _stonemillBearsCount++;
                 _atStonemillText.text = $"{_stonemillBearsCount} / {_maxWorkersCount}";
                 break;
             case ProductionType.Paseka:
-                bear.SetWorkPlace(Paseka);
+                bear.SetWorkPlace(Paseka, AmbarPaseka, type);
                 _pasekaBearsCount++;
                 _atPasekaText.text = $"{_pasekaBearsCount} / {_maxWorkersCount}";
                 break;
         }
-        
-        bear.ToWork();
+
+        bear.AmbarEntered += AmbarEntered;
+        bear.ToWork(fromFlag: true);
+    }
+
+    public void AmbarEntered(ProductionType type)
+    {
+        _spawner.Spawn(type);
+
+        switch (type)
+        {
+            case ProductionType.Sawmill:
+                Resources.AddWood();
+                break;
+            case ProductionType.Stonemill:
+                Resources.AddMetal();
+                break;
+            case ProductionType.Paseka:
+                Resources.AddHoney();
+                break;
+        }
     }
 }

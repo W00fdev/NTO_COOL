@@ -59,7 +59,8 @@ public class BuildingsGrid : MonoBehaviour
                 
                 bool available = !(x < 0 || y < 0 
                                          || x > GridSize.x - flyingBuilding.Size.x
-                                         || y > GridSize.y - flyingBuilding.Size.y);
+                                         || y > GridSize.y - flyingBuilding.Size.y
+                                         || x > 85);
 
                 
                 if (available && IsPlaceTaken(x, y)) available = false;

@@ -53,6 +53,41 @@ public class ResourcesScript : MonoBehaviour
         bearsText.text = bearsPreview.ToString();
     }
 
+    public void AddHoney()
+    {
+        honey++;
+        honeyPreview++;
+        honeyText.text = honeyPreview.ToString();
+    }
+    
+    public void RemoveHoney()
+    {
+        honey--;
+        honeyPreview--;
+        honeyText.text = honeyPreview.ToString();
+    }
+    
+    public void AddMetal()
+    {
+        metal++;
+        metalPreview++;
+        metalText.text = metalPreview.ToString();
+    }
+    
+    public void AddWood()
+    {
+        wood++;
+        woodPreview++;
+        woodText.text = woodPreview.ToString();
+    }
+    
+    public void RemoveMetal()
+    {
+        metal--;
+        metalPreview--;
+        metalText.text = metalPreview.ToString();
+    }
+
     public void ApplyPreview()
     {
         metal = metalPreview;
