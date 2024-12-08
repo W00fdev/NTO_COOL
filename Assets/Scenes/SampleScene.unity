@@ -975,7 +975,7 @@ Transform:
   m_GameObject: {fileID: 112591699}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35, y: -13, z: 52.3}
+  m_LocalPosition: {x: 50, y: 0, z: 50}
   m_LocalScale: {x: 10.681863, y: 10.681863, z: 10.681863}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9571,7 +9571,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Igly
+  m_text: Honey Factory
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3295e99d47d2aa04f9449987809e33ea, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 3295e99d47d2aa04f9449987809e33ea, type: 2}
@@ -9605,8 +9605,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 16
+  m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -25399,7 +25399,7 @@ MonoBehaviour:
   HoneyPrice: 0
   BearsPrice: 0
   Resources: {fileID: 2074139485}
-  Prefab: {fileID: 4860002269828401402, guid: 104096dbf2f69ae48b7ad6df8a5298b7, type: 3}
+  Prefab: {fileID: 4860002269828401402, guid: 579a675ba5f797d4f9a726b0ca562449, type: 3}
   Grid: {fileID: 864390512}
 --- !u!1 &2046682086
 GameObject:
@@ -27663,7 +27663,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2525662007637093263, guid: b65e9dc61cbce1a43adaca5ba9da4a9c, type: 3}
+  - {fileID: 2100000, guid: 6c9f849b41a11e84f9df563ca6f907a2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
