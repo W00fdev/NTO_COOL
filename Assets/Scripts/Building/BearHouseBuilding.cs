@@ -11,7 +11,7 @@ public class BearHouseBuilding : Building
         foreach (var point in SpawnPoints)
         {
             var bear = GameObject.Instantiate(_agent, point.position, Quaternion.identity);
-            bear.GoToFlag();
+            //bear.GoToFlag();
         }
     }
 }

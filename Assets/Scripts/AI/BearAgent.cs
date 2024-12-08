@@ -10,6 +10,8 @@ public class BearAgent : MonoBehaviour
     [SerializeField] private GetPointForAgent _resourceTarget;
     [SerializeField] private GetPointForAgent _factoryTarget;
     private GetRandomPointForAgent _flagTarget;
+
+    [SerializeField] private ProductionController _productionController;
     
     [SerializeField] private NavMeshAgent _agent;
     [SerializeField] private Animator _animator;
@@ -30,7 +32,8 @@ public class BearAgent : MonoBehaviour
 
     private void SelfInitialize()
     {
-        _flagTarget = GameObject.FindGameObjectWithTag("Flag").GetComponent<GetRandomPointForAgent>();
+        _productionController = GameObject.FindGameObjectWithTag("Production").GetComponent<ProductionController>();
+        _productionController.BearSpawned(this);
     }
     
     public void GoToFlag()
@@ -52,6 +55,7 @@ public class BearAgent : MonoBehaviour
         _isStopped = true;
         
         _animator.SetTrigger("HappyIdle");
+        _productionController.BearAtFlag(this);
     }
     
     private void Update()
@@ -108,10 +112,12 @@ public class BearAgent : MonoBehaviour
     }
 
 
-    private void ToWork()
+    public void ToWork()
     {
         _toWork = true;
         _prevToWork = true;
+        _isStopped = false;
+        _agent.isStopped = false;
         
         _animator.SetTrigger("ToWork");
         
@@ -134,4 +140,13 @@ public class BearAgent : MonoBehaviour
         _targetPosition = _resourceTarget.GetPoint();
         _agent.SetDestination(_targetPosition);
     }
+
+    public void Initialize(GetRandomPointForAgent flag, GetPointForAgent ambar)
+    {
+        _flagTarget = flag;
+        _resourceTarget = ambar;
+    }
+
+    public void SetWorkPlace(GetPointForAgent work)
+        => _factoryTarget = work;
 }

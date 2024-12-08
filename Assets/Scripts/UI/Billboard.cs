@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Billboard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [FormerlySerializedAs("Camera")] public Transform MainCamera;
+    
+    void Awake()
     {
-        
+        if (MainCamera == null)
+            MainCamera = UnityEngine.Camera.main.transform;
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        transform.forward = MainCamera.forward;
     }
 }

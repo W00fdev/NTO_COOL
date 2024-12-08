@@ -15,7 +15,9 @@ public class ResourcesScript : MonoBehaviour
     public TMP_Text woodText; 
     public TMP_Text honeyText;
     public TMP_Text bearsText;
-
+    
+    public TMP_Text bearsAtFlagText;
+    
     private int metalPreview;
     private int woodPreview;
     private int honeyPreview;
@@ -31,6 +33,23 @@ public class ResourcesScript : MonoBehaviour
         metalText.text = metalPreview.ToString();
         woodText.text = woodPreview.ToString();
         honeyText.text = honeyPreview.ToString();
+        bearsText.text = bearsPreview.ToString();
+    }
+
+    public void AddBear()
+    {
+        bearsPreview += 1;
+        bears += 1;
+
+        bearsAtFlagText.text = $"{bearsPreview} / {ProductionController._maxFlagCount}";
+        bearsText.text = bearsPreview.ToString();
+    }
+
+    public void RemoveBear()
+    {
+        bearsPreview -= 1;
+        bears -= 1;
+        bearsAtFlagText.text = $"{bearsPreview} / {ProductionController._maxFlagCount}";
         bearsText.text = bearsPreview.ToString();
     }
 
@@ -72,7 +91,7 @@ public class ResourcesScript : MonoBehaviour
     
     public void ChangeBearsPreview(int delta)
     {
-        bearsPreview += delta;
-        UpdateText();
+        //bearsPreview += delta;
+        //UpdateText();
     }
 }
